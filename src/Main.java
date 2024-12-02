@@ -9,9 +9,12 @@ public class Main {
 
         defineAppVersion(0, 2020);
         defineAppVersion(1, 2024);
+        defineAppVersion(0, 2014);
+        defineAppVersion(1, 2012);
 
         System.out.println("Потребуется дней: " + cardDays(25)+ " срок доставки");
         System.out.println("Потребуется дней: " + cardDays(80)+ " срок доставки");
+        System.out.println("Потребуется дней: " + cardDays(101)+ " срок доставки");
 
 
 
@@ -37,23 +40,29 @@ public class Main {
             default:
                 mobileOsName = "неизвестная ОС";
         }
-        int currentYear = LocalDate.now().getYear();
-        if (mobileYear != currentYear) {
+        int currentYear = 2015;
+        if (mobileYear < currentYear && mobileOs ==0){
             System.out.println("Для ОС " + mobileOsName + " установите lite-версию");
-        } else {
+        } else if (mobileYear >= currentYear && mobileOs ==0){
+        System.out.println("Для ОС " + mobileOsName + " установите обычную версию");
+        } else if (mobileYear < currentYear && mobileOs ==1) {
+            System.out.println("Для ОС " + mobileOsName + " установите lite-версию");
+        }else {
             System.out.println("Для ОС " + mobileOsName + " установите обычную версию");
         }
-    }
-    public static int cardDays ( int distance){
+
+    } public static int cardDays ( int distance) {
         int deliveryDays;
         if (distance <= 20) {
             deliveryDays = 1;
         } else if (distance <= 60) {
             deliveryDays = 2;
-        } else {
+        } else if (distance > 60 && distance <= 100) {
             deliveryDays = 3;
+        } else {
+            deliveryDays = 0;
+            System.out.println("Доставки нет");
         }
-
         return deliveryDays;
     }
 }
